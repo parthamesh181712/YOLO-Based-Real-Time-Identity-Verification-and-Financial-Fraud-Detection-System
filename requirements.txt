@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+cryptography
+passlib
+bcrypt<4.0.0
+opencv-python
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+joblib
+pytesseract
+ultralytics
+deepface
