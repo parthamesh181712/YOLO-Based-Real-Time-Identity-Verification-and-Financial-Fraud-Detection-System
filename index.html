@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SecureFin Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="page-shell">
+    <aside class="sidebar">
+        <div>
+            <div class="brand">SecureFin</div>
+            <p class="brand-copy">Compliance workspace for guided KYC and AML review.</p>
+        </div>
+        <div class="nav-stack">
+            <button class="nav-chip active" data-screen="authScreen">1. Login</button>
+            <button class="nav-chip" data-screen="kycScreen">2. KYC Screen</button>
+            <button class="nav-chip" data-screen="amlScreen">3. AML Screen</button>
+        </div>
+        <div class="sidebar-note">
+            <strong>Default agent</strong>
+            <p>agent01 / agent123</p>
+        </div>
+    </aside>
+
+    <main class="main-panel">
+        <header class="topbar">
+            <div>
+                <h1>Compliance Console</h1>
+                <p>Keep KYC and AML as separate review stages.</p>
+            </div>
+            <div id="sessionBadge" class="session-badge">Not Logged In</div>
+        </header>
+
+        <section id="authScreen" class="screen active">
+            <div class="content-grid single">
+                <div class="panel-card hero-card">
+                    <h2>Agent Login</h2>
+                    <p class="muted">Sign in first, then open KYC and AML as separate screens.</p>
+                    <form id="loginForm" class="form-grid compact">
+                        <input type="text" name="username" placeholder="Username" required value="agent01">
+                        <input type="password" name="password" placeholder="Password" required value="agent123">
+                        <button type="submit">Login</button>
+                    </form>
+                    <div id="loginResult"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kycScreen" class="screen">
+            <div class="content-grid two-col">
+                <div class="panel-card video-card">
+                    <div class="section-head">
+                        <h2>KYC Verification</h2>
+                        <span class="pill">Separate Stage</span>
+                    </div>
+                    <video id="video" autoplay muted playsinline></video>
+                    <div id="challengeBox" class="challenge-box">
+                        <h3>Liveness Challenge</h3>
+                        <p id="challengeText">Press Verify KYC to start guided liveness.</p>
+                        <p id="challengeSubtext">The system will ask the customer to turn left or right, then blink.</p>
+                    </div>
+                </div>
+
+                <div class="panel-card form-card">
+                    <form id="kycForm" class="form-grid">
+                        <input type="text" name="customer_id" placeholder="Customer ID" required value="CUST123456">
+                        <input type="text" name="name" placeholder="Full Name" required>
+                        <input type="date" name="dob" required>
+                        <select name="doc_type">
+                            <option value="aadhaar">Aadhaar</option>
+                            <option value="pan">PAN</option>
+                        </select>
+                        <input type="file" name="document" required>
+                        <button type="submit">Verify KYC</button>
+                    </form>
+                    <div id="kycResult"></div>
+                    <div class="button-row">
+                        <button id="goToAmlBtn" class="secondary hidden" type="button">Open AML Screen</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="amlScreen" class="screen">
+            <div class="content-grid two-col aml-layout">
+                <div class="panel-card form-card">
+                    <div class="section-head">
+                        <h2>AML Risk Check</h2>
+                        <span class="pill">Separate Stage</span>
+                    </div>
+                    <form id="amlForm" class="form-grid">
+                        <input type="text" name="customer_id" placeholder="Customer ID" required value="CUST123456">
+                        <input type="number" name="amount" placeholder="Transaction Amount" required value="95000">
+                        <input type="number" name="old_balance" placeholder="Old Balance" required value="150000">
+                        <input type="number" name="new_balance" placeholder="New Balance" required value="55000">
+                        <select name="transaction_type">
+                            <option value="0">Cash In</option>
+                            <option value="1">Cash Out</option>
+                            <option value="2">Debit</option>
+                            <option value="3" selected>Transfer</option>
+                            <option value="4">Payment</option>
+                        </select>
+                        <input type="datetime-local" name="transaction_date" required>
+                        <button type="submit">Check AML</button>
+                    </form>
+                </div>
+
+                <div class="panel-card result-card">
+                    <div id="amlResult"></div>
+                    <button id="timelineBtn" class="secondary hidden" type="button">View Customer Timeline</button>
+                    <div id="timelineResult"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
